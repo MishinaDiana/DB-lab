@@ -1,3 +1,3 @@
 use world;
 select * from city;
-select * from city where name like 's%';
+select * from city where name like 'a%';
