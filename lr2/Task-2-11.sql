@@ -3,4 +3,4 @@
 USE cd;
 SELECT firstname AS 'name/fasility' FROM members
 UNION
-SELECT facility AS 'name/fasility' FROM facilities;
+SELECT facility FROM facilities;
