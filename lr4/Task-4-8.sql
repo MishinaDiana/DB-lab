@@ -8,6 +8,6 @@ USE cd;
 START TRANSACTION;
 DELETE FROM members WHERE memid=37;
 SELECT * FROM members;
-ROLLBACK;
+COMMIT;
 select * from members;
-/*Впервом выводе 36 строк, а во втором 37 т.к. мы отказались от изменений*/ 
+/*И в первом, и во втором выводе одинаковое количество строк т.к. мы сохранили изменения*/ 
