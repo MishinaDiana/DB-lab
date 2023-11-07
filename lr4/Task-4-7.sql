@@ -1,6 +1,6 @@
 use cd;
 START TRANSACTION;
-   TRUNCATE TABLE bookings;
+   DELETE FROM bookings WHERE bookid >-1;
    SELECT * FROM bookings;
 ROLLBACK;
 SELECT * FROM bookings;
