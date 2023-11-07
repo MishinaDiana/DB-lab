@@ -7,6 +7,6 @@ MODIFY membercost numeric(8,2),
 MODIFY gestcost numeric(8,2);
 
 INSERT facilities (facid,facility, membercost, guestcost, initialoutlay, monthlymaintenance)
-values 
+VALUES 
 (10,'Squash Court 2', 3.5, 17.5, 5000, 80),
 (11,'Squash Court 3', 3.5, 17.5, 5000, 80);
