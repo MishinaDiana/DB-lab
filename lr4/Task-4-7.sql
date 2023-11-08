@@ -7,3 +7,4 @@ START TRANSACTION;
    SELECT * FROM bookings;
 ROLLBACK;
 SELECT * FROM bookings;
+/*Первый вывод показывает пустую таблицу, а во втором выводе таблица заполнена*/
