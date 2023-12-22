@@ -33,29 +33,30 @@ SIGNAL SQLSTATE '45000'
 SET MESSAGE_TEXT = 'Эту запись нельзя удалить';
 END IF//
 
-DROP TRIGGER IF EXISTS pay_insert//
-CREATE TRIGGER pay_insert AFTER UPDATE
+DROP TRIGGER IF EXISTS pay_insert_delete//
+CREATE TRIGGER pay_insert_delete AFTER UPDATE
 ON bookings
 FOR EACH ROW
 BEGIN
-   IF NEW.payed != OLD.payed THEN 
-      IF NEW.payed = 1 THEN 
+   CASE
+      WHEN NEW.payed = OLD.payed THEN BEGIN END;
+      WHEN NEW.payed = 1 THEN 
          INSERT INTO payments (bookid, payment) 
          VALUES (NEW.bookid, slot_cost(NEW.memid, NEW.facid, NEW.slots));
-      END IF;
-   END IF;
+      WHEN NEW.payed = 0 THEN
+         DELETE FROM payments p WHERE p.bookid = NEW.bookid;
+   END CASE;
 END//
 
-DROP TRIGGER IF EXISTS pay_delete//
-CREATE TRIGGER pay_delete AFTER UPDATE
-ON bookings
-FOR EACH ROW
+DROP TRIGGER IF EXISTS payed_already //
+CREATE TRIGGER payed_already AFTER INSERT ON bookings FOR EACH ROW
 BEGIN
-IF NEW.payed != OLD.payed THEN 
-DELETE FROM payments WHERE 
-(SELECT book.payed FROM bookings book JOIN payments pay ON book.bookid = pay.bookid) =0;
-END IF;
-END//
+    -- Если бронь уже оплачена при регистрации (payed = 1), добавляет оплату.
+    IF NEW.payed = 1 THEN
+        INSERT INTO payments(bookid, payment)
+        VALUES(NEW.bookid, slot_cost(NEW.memid, NEW.facid, NEW.slots));
+    END IF;
+END //
 
 DELIMITER ;
 
