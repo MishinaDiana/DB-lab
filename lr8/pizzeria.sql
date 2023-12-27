@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `pizzeria`.`order_cost` (`ID` INT, `'ID достав�
 -- -----------------------------------------------------
 -- Placeholder table for view `pizzeria`.`average_quantity`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pizzeria`.`average_quantity` (`ID` INT, `'Название позиции'` INT, `'Дата заказа'` INT, `'Среднее кол-во заказов'` INT);
+CREATE TABLE IF NOT EXISTS `pizzeria`.`average_quantity` (`ID` INT, `'Название позиции'` INT, `'Среднее кол-во заказов'` INT);
 
 -- -----------------------------------------------------
 -- View `pizzeria`.`free_deliveryman`
